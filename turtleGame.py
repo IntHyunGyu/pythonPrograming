@@ -123,7 +123,7 @@ def game_over():
     player.hideturtle()
     score_turtle.clear()
     score_turtle.goto(0, 0)
-    score_turtle.write(f"Game Over! final Score : {score}\n enter R ", align="center", font=("Arial", 18, "bold"))
+    score_turtle.write(f"Game Over!\n final Score : {score}\n enter R ", align="center", font=("Arial", 18, "bold"))
 
 # 게임 재시작
 def restart_game():
