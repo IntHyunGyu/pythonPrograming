@@ -1,53 +1,41 @@
 import turtle
 import random
 
-# -----------------------------------
-# 화면 설정 (450 x 450)
-# -----------------------------------
+# 화면 설정
 wn = turtle.Screen()
-wn.title("거북이 피하기 게임")
+wn.title("turtle game")
 wn.bgpic("img/minimap.gif")  # 배경 GIF 유지
 wn.setup(width=450, height=450)
 wn.tracer(0)
 
-# -----------------------------------
 # 점수 표시
-# -----------------------------------
 score = 0
 score_turtle = turtle.Turtle()
 score_turtle.hideturtle()
 score_turtle.penup()
 score_turtle.goto(0, 200)
-score_turtle.write(f"점수: {score}", align="center")
+score_turtle.write(f"score: {score}", align="center", font=("Arial", 16, "bold"))
 
-# -----------------------------------
 # 플레이어 설정
-# -----------------------------------
 wn.register_shape("img/minion.gif")  # 플레이어 이미지
 player = turtle.Turtle()
 player.shape("img/minion.gif")
 player.penup()
 player.goto(0, -175)
-player.shapesize(stretch_wid=0.5, stretch_len=0.5)  # 50% 크기
+player.shapesize(stretch_wid=0.5, stretch_len=0.5)
 player.speed(0)
 
 PLAYER_SPEED = 15
 
-# -----------------------------------
 # 장애물 설정
-# -----------------------------------
 obstacles = []
 OBSTACLE_SPEED = 4
 COLORS = ["red", "blue", "magenta", "orange", "purple", "cyan"]
 
-# -----------------------------------
 # 게임 상태
-# -----------------------------------
 GAME_RUNNING = True
 
-# -----------------------------------
 # 플레이어 이동
-# -----------------------------------
 def move_left():
     if GAME_RUNNING:
         x = player.xcor() - PLAYER_SPEED
@@ -78,22 +66,16 @@ wn.onkeypress(move_right, "Right")
 wn.onkeypress(move_up, "Up")
 wn.onkeypress(move_down, "Down")
 
-# -----------------------------------
 # 충돌 체크
-# -----------------------------------
 def check_collision(obj):
     return player.distance(obj) < 20
 
-# -----------------------------------
 # 점수 업데이트
-# -----------------------------------
 def update_score():
     score_turtle.clear()
-    score_turtle.write(f"점수: {score}", align="center", font=("맑은 고딕", 16, "bold"))
+    score_turtle.write(f"score: {score}", align="center", font=("Arial", 16, "bold"))
 
-# -----------------------------------
 # 장애물 생성
-# -----------------------------------
 def spawn_obstacle():
     if not GAME_RUNNING:
         return
@@ -110,9 +92,7 @@ def spawn_obstacle():
         obstacles.append(obstacle)
     wn.ontimer(spawn_obstacle, random.randint(800, 1500))
 
-# -----------------------------------
 # 장애물 이동
-# -----------------------------------
 def move_obstacles():
     global score, OBSTACLE_SPEED
     if not GAME_RUNNING:
@@ -133,9 +113,7 @@ def move_obstacles():
     wn.update()
     wn.ontimer(move_obstacles, 20)
 
-# -----------------------------------
 # 게임 종료
-# -----------------------------------
 def game_over():
     global GAME_RUNNING
     GAME_RUNNING = False
@@ -145,11 +123,9 @@ def game_over():
     player.hideturtle()
     score_turtle.clear()
     score_turtle.goto(0, 0)
-    score_turtle.write(f"게임 종료! 최종 점수: {score}\nR 키로 재시작", align="center", font=("맑은 고딕", 18, "bold"))
+    score_turtle.write(f"Game Over! final Score : {score}\n enter R ", align="center", font=("Arial", 18, "bold"))
 
-# -----------------------------------
 # 게임 재시작
-# -----------------------------------
 def restart_game():
     global score, OBSTACLE_SPEED, GAME_RUNNING
     for obs in obstacles:
@@ -168,9 +144,7 @@ def restart_game():
 
 wn.onkey(restart_game, "r")
 
-# -----------------------------------
 # 게임 시작
-# -----------------------------------
 spawn_obstacle()
 move_obstacles()
 wn.mainloop()
