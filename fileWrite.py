@@ -1,0 +1,7 @@
+﻿f = open('number.txt', 'w')
+f.write("100\n")
+f.write("200\n")
+f.write("300\n")
+f.write("400\n")
+f.write("500\n")
+f.close()

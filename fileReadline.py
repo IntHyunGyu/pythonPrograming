@@ -1,0 +1,8 @@
+﻿f = open("number.txt","r")
+s = f.readline()
+print(s, end='')
+s = f.readline()
+print(s, end='')
+s = f.readline()
+print(s, end='')
+f.close()
